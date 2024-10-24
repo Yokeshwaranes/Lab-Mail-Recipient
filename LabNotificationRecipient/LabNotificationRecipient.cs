@@ -133,7 +133,7 @@ namespace LabNotificationRecipient
             DataTable dtResult = new DataTable();
             try
             {
-                string query = "Select EmailId from Lab_NotificationRecipients where SETUPID= " + "'" + SETUPID + "'" + "and Projectid=" + "'" + PROJECTID + "'" +"and IsActive='1'";
+                string query = "Select EmailId from Lab_OncologyRecipients where SETUPID= " + "'" + SETUPID + "'" + "and Projectid=" + "'" + PROJECTID + "'" +"and IsActive='1'";
                 DAL oprojectDAL = new DAL(connectionString);
                 dtResult = oprojectDAL.ExecuteQuery(query, null);
             }
