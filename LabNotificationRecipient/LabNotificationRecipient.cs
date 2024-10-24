@@ -35,8 +35,8 @@ namespace LabNotificationRecipient
             TemplateId = ConfigurationManager.AppSettings["TemplateId"];
             connectionStringLab = ConfigurationManager.AppSettings["Main.ConnectionStringLab"];
             ReportId= ConfigurationManager.AppSettings["ReportId"];
-            ParameterGroup = ConfigurationManager.AppSettings["ParameterGroup"];
-            ParameterType = ConfigurationManager.AppSettings["ParameterType"];
+            //ParameterGroup = ConfigurationManager.AppSettings["ParameterGroup"];
+            //ParameterType = ConfigurationManager.AppSettings["ParameterType"];
         }
         public void SendMail()
         {
@@ -51,7 +51,7 @@ namespace LabNotificationRecipient
                     
                 
                 
-                DataTable dtLabMailRecipient = GetLabMailRecipient();// whom to send mail from stp_parameter
+                DataTable dtLabMailRecipient = GetLabMailRecipient();// whom to send mail from LabMailRecipient
                 if (dtEmailSetup != null && dtEmailSetup.Rows.Count > 0 ) 
                 {
                     //Email Body
@@ -68,7 +68,7 @@ namespace LabNotificationRecipient
                             emailBody = emailBody.Replace("{strdate}", formattedDate);
                             emailBody = emailBody.Replace("*Table*", table);
                            // emailSubject = emailSubject.Replace("{DoctorName}", Convert.ToString(row["DOCTORNAME"]));
-                            string mailID = Convert.ToString(row["LabMailRecipient"]);
+                            string mailID = Convert.ToString(row["EmailId"]);
 
                             string emailType = "LabNotificationRecipient";
                            
@@ -133,7 +133,7 @@ namespace LabNotificationRecipient
             DataTable dtResult = new DataTable();
             try
             {
-                string query = "Select Description As LabMailRecipient from STP_Parameter where SETUPID= " + "'" + SETUPID + "'" + "and ParameterGroup=" + "'" + ParameterGroup + "'" +"and ParameterType=" + "'" + ParameterType + "'";
+                string query = "Select EmailId from Lab_NotificationRecipients where SETUPID= " + "'" + SETUPID + "'" + "and Projectid=" + "'" + PROJECTID + "'" +"and IsActive='1'";
                 DAL oprojectDAL = new DAL(connectionString);
                 dtResult = oprojectDAL.ExecuteQuery(query, null);
             }
@@ -156,8 +156,8 @@ namespace LabNotificationRecipient
                 if (dtResult.Rows.Count > 0)
                 {
 
-                   // string Notificationdatefrom = "2024-01-01";
-                    //string Notificationdateto = "2024-07-31";
+                  // string Notificationdatefrom = "2024-01-01";
+                  //string Notificationdateto = "2024-07-31";
                     
                     query = Convert.ToString(dtResult.Rows[0]["SQLQUERY"]);
                     
