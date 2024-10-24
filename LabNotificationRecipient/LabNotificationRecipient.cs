@@ -20,8 +20,8 @@ namespace LabNotificationRecipient
         public static string connectionStringLab = null;
         public static string TemplateId;
         public static string ReportId;
-        public static string ParameterGroup;
-        public static string ParameterType;
+       // public static string ParameterGroup;
+        //public static string ParameterType;
         
        
 
